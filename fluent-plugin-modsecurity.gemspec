@@ -3,10 +3,10 @@ $:.push File.expand_path('../lib', __FILE__)
 
 Gem::Specification.new do |s|
   s.name          = 'fluent-plugin-modsecurity'
-  s.version       = '0.1.2'
+  s.version       = '0.1.3'
   s.authors       = ['kaija']
   s.email         = ['kaija.chang@gmail.com']
-  s.description   = %q{modsecurity filter plugin for Fluent detail log}
+  s.description   = %q{modsecurity filter plugin for Fluent detail log. more detail please see https://github.com/kaija/fluent-plugin-modsecurity}
   s.summary       = %q{modsecurity filter plugin}
   s.homepage      = 'https://github.com/kaija/fluent-plugin-modsecurity'
   s.license       = 'MIT'
