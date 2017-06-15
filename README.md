@@ -29,6 +29,10 @@ SecAuditLog2 /var/log/modsec/audit.log
 #set detail audit log storage dir
 SecAuditLogStorageDir /var/log/modsec
 
+#change log file and dir permision for td-agent
+SecAuditLogFileMode 0644
+SecAuditLogDirMode 0755
+
 ```
 
 
