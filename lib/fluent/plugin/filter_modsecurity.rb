@@ -2,6 +2,7 @@
 require 'json'
 
 class Fluent::ModsecurityFilter < Fluent::Filter
+
     Fluent::Plugin.register_filter('modsecurity', self)
 
     desc "Path prefix of the detail log"

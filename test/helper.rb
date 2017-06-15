@@ -1,28 +1,24 @@
-require 'rubygems'
-require 'bundler'
-begin
-  Bundler.setup(:default, :development)
-rescue Bundler::BundlerError => e
-  $stderr.puts e.message
-  $stderr.puts "Run `bundle install` to install missing gems"
-  exit e.status_code
+require 'simplecov'
+SimpleCov.start do
+  add_filter do |src|
+    !(src.filename =~ /^#{SimpleCov.root}\/lib/)
+  end
 end
+
+require 'coveralls'
+Coveralls.wear!
+
+# needs to be after simplecov but before test/unit, because fluentd sets default
+# encoding to ASCII-8BIT, but coverall might load git data which could contain a
+# UTF-8 character
+at_exit do
+  Encoding.default_internal = 'UTF-8' if defined?(Encoding) && Encoding.respond_to?(:default_internal)
+  Encoding.default_external = 'UTF-8' if defined?(Encoding) && Encoding.respond_to?(:default_external)
+end
+
 require 'test/unit'
-
-$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
-$LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'fluent/test'
-unless ENV.has_key?('VERBOSE')
-  nulllogger = Object.new
-  nulllogger.instance_eval {|obj|
-    def method_missing(method, *args)
-      # pass
-    end
-  }
-  $log = nulllogger
-end
+require 'minitest/pride'
 
-require 'fluent/plugin/filter_modsecurity'
-
-class Test::Unit::TestCase
-end
+#require 'webmock/test_unit'
+#WebMock.disable_net_connect!
