@@ -1,10 +1,38 @@
 # fluent-plugin-modsecurity
-fluentd plugin for modsecurity log
+fluentd plugin for modsecurity log. Enable modsecurity audit log 2 to export nginx access log like block log. Detail log path included in audit log2. Read and combine the detail log record by this plugin.
 
 [![Build Status](https://travis-ci.org/kaija/fluent-plugin-modsecurity.svg?branch=master)](https://travis-ci.org/kaija/fluent-plugin-modsecurity)
 
 
-# td-agent config
+## Build / Install
+
+
+```
+#self build and install
+gem build fluent-plugin-modsecurity.gemspec
+sudo td-agent-gem install fluent-plugin-modsecurity-0.1.2.gem
+
+or
+
+#install from public rubygems
+sudo td-agent-gem install fluent-plugin-modsecurity
+
+```
+
+
+## modsecurity setting
+
+```
+#setup modsecurity audit log 2
+SecAuditLog2 /var/log/modsec/audit.log
+
+#set detail audit log storage dir
+SecAuditLogStorageDir /var/log/modsec
+
+```
+
+
+## td-agent config
 
 
 ```
