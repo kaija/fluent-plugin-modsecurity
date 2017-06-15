@@ -23,9 +23,13 @@ class Fluent::ModsecurityFilter < Fluent::Filter
                 end
             }
         }
-        file = File.read(log_path)
-        data_hash = JSON.parse(file)
-        record['detail'] = data_hash
+        #find detail log and append to record
+        unless log_path.to_s.strip.empty?
+            file = File.read(log_path)
+            data_hash = JSON.parse(file)
+            #copy transaction object to original record
+            record['transaction'] = data_hash['transaction']
+        end
         record
     end
 end
