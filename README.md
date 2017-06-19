@@ -23,6 +23,8 @@ sudo td-agent-gem install fluent-plugin-modsecurity
 ## modsecurity setting
 
 ```
+SecAuditLogType Parallel
+
 #setup modsecurity audit log 2
 SecAuditLog2 /var/log/modsec/audit.log
 
