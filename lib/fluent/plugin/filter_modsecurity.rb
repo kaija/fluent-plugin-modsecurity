@@ -16,13 +16,15 @@ class Fluent::ModsecurityFilter < Fluent::Filter
     def filter(tag, time, record)
         log_path = ""
         record.each{ |key, value|
-            token = value.split(" ")
-            token.each { |v|
-                if v.start_with?(@path_prefix)
-                    log_path = v
-                    break
-                end
-            }
+            if value.is_a?(String)
+                token = value.split(" ")
+                token.each { |v|
+                    if v.start_with?(@path_prefix)
+                        log_path = v
+                        break
+                    end
+                }
+            end
         }
         #find detail log and append to record
         unless log_path.to_s.strip.empty?
